@@ -119,7 +119,7 @@
                         <td><?php echo ($row["tel"]); ?></td>
                         <td><?php echo ($row["address"]); ?></td>
                         <td><?php echo ($row["question"]); ?></td>
-                        <td><?php echo ($row["create_time"]); ?></td>
+                        <td><?php echo (date("Y-m-d H:i:s",$row["create_time"])); ?></td>
                         <td>
                             <a title="编辑" href="<?php echo U('edit?id='.$row['id'].'&pid='.$pid);?>">编辑</a>
                             <a href="<?php echo U('setStatus?ids='.$row['id'].'&status='.abs(1-$row['status']));?>" class="ajax-get"><?php echo (show_status_op($row["status"])); ?></a>

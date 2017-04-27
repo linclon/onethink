@@ -102,4 +102,42 @@ return array(
     'TMPL_ACTION_SUCCESS'   =>  MODULE_PATH.'View/Public/success.html', // 默认成功跳转对应的模板文件
     'TMPL_EXCEPTION_FILE'   =>  MODULE_PATH.'View/Public/exception.html',// 异常页面的模板文件
 
+    /*esaywechat微信配置*/
+    'ESAY_WECHAT'=>[
+        'debug'  => true,
+        'app_id'  => 'wx78b074f4099d7bcc',         // AppID
+        'secret'  => 'c7df9f23f161907873bf7143c239a983',     // AppSecret
+        'token'   => 'stupidfish',
+        // 'aes_key' => null, // 可选
+        'log' => [
+            'level' => 'debug',
+            'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
+        ],
+        'oauth' => [
+            'scopes'   => ['snsapi_base'],
+            'callback' => '/wechat/callback',//配置授权回调地址【配置文件里面修改】
+        ],
+        /**
+         * 微信支付
+         */
+        'payment' => [
+            'merchant_id'        => 'your-mch-id',
+            'key'                => 'key-for-signature',
+            'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+            'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+            // 'device_info'     => '013467007045764',
+            // 'sub_app_id'      => '',
+            // 'sub_merchant_id' => '',
+            // ...
+        ],
+        /**
+         * Guzzle 全局设置
+         *
+         * 更多请参考： http://docs.guzzlephp.org/en/latest/request-options.html
+         */
+        'guzzle' => [
+            'timeout' => 3.0, // 超时时间（秒）
+            //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+        ]
+    ],
 );
