@@ -9,13 +9,15 @@
 namespace Admin\Controller;
 // 引入我们的主项目的入口类。
 use EasyWeChat\Foundation\Application;
+use Think\Controller;
 
 
-class WechatController extends AdminController
+class WechatController extends Controller
 {
     public function index()
     {
-        // 这行代码是引入 `composer` 的入口文件，这样我们的类才能正常加载。
+/*        // 这行代码是引入 `composer` 的入口文件，这样我们的类才能正常加载。
+
         include __DIR__ . '/vendor/autoload.php';
 
         // 一些配置
@@ -30,7 +32,7 @@ class WechatController extends AdminController
         $response->send();//跳转到回调方法获取用户信息
         }
         $user = $_SESSION['wechat_user'];
-        var_dump($user);
+        var_dump($user);*/
 //        echo I('get.echostr');
     }
 
@@ -39,7 +41,7 @@ class WechatController extends AdminController
     {
         // 一些配置
         $options = [
-            'debug'  => true,
+            'debug'  => false,
             'app_id'  => 'wx78b074f4099d7bcc',         // AppID
             'secret'  => 'c7df9f23f161907873bf7143c239a983',     // AppSecret
             'token'   => 'stupidfish',

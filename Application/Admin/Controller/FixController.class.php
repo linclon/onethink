@@ -37,7 +37,7 @@ class FixController extends AdminController
             $fix = D('Fix');//实例化模型
             $data = $fix->create();
             if($data){
-                $fix->create_time = time();
+//                $fix->create_time = time();
                 $fix->order = substr(str_shuffle('12346579879KLVNIOANGSOKLN'),0,11);
                 $id = $fix->add();
                 if($id){//返回数据的id

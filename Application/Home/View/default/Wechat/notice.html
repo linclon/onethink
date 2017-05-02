@@ -1,0 +1,85 @@
+<extend name="Base/base"/>
+<block name="body">
+    <body>
+    <div class="main">
+        <!--&lt;!&ndash;导航部分&ndash;&gt;
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container-fluid text-center">
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+                </div>
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="#" class="navbar-link">服务</a></p>
+                </div>
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="#" class="navbar-link">发现</a></p>
+                </div>
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="#" class="navbar-link">我的</a></p>
+                </div>
+            </div>
+        </nav>-->
+        <!--导航结束-->
+
+        <div class="container-fluid">
+            <volist name="list" id="row">
+                <div class="row noticeList">
+                    <a href="{:U('Wechat/detail?id='.$row['id'])}">
+                        <div class="col-xs-2">
+                            <img class="noticeImg" src="<?php echo get_cover($row['cover_id'],'path')?>" />
+                        </div>
+                        <div class="col-xs-10">
+                            <p class="title">{$row['title']}</p>
+                            <p class="intro">{$row['description']}</p>
+                            <p class="info">浏览: {$row['view']} <span class="pull-right">2016-05-11</span> </p>
+                        </div>
+                    </a>
+                </div>
+            </volist>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="button" class="btn btn-info get_more" value="获取更多..">
+    </div>
+</block>
+<block name="script">
+<script type="application/javascript">
+$(function(){
+    //定义并初始化分页参数
+    var p = 1;
+    //绑定事件
+    $(".get_more").click(function(){
+        //发送ajax请求,传入分页参数
+        $.post("{:U('inform')}",{p:p+1},function(data){
+            //查看返回数据 判断status
+            if(data.status == 1){
+                p++;//分页参数自增
+                //遍历数据,追加
+                var Html = '';
+                $(data.info).each(function(i,e){
+                    Html = '<div class="row noticeList">\
+                            <a href="'+ e.url +'">\
+                            <div class="col-xs-2">\
+                            <img class="noticeImg" src="'+ e.path +'" />\
+                            </div>\
+                            <div class="col-xs-10">\
+                            <p class="title">'+ e.title +'</p>\
+                            <p class="intro">'+ e.description +'</p>\
+                            <p class="info">浏览: '+ e.view +' <span class="pull-right">'+ e.create_time +'</span> </p>\
+                    </div>\
+                    </a>\
+                    </div>';
+                });
+                //追加
+                $('.main').append(Html);
+            }else{
+                //解除事件绑定
+                $(".get_more").val("没有更多了");
+                $(".get_more").addClass('btn-warning');
+                $(".get_more").off();
+            }
+        });
+    });
+});
+</script>
+</block>
